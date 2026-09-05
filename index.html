@@ -102,6 +102,42 @@
   @keyframes pulse { 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.06);} }
   .meshlink .under { margin-top:8px; font-size:11.5px; color:#8ea2cc; }
 
+  /* ── claude-moment scene ──────────────────── */
+  .scene {
+    margin:52px auto 0; max-width:860px; padding:30px 30px 26px; border-radius:24px;
+    background:linear-gradient(165deg, rgba(124,107,255,.10), rgba(0,229,255,.04));
+    border:1px solid rgba(124,107,255,.35); box-shadow:0 30px 60px -20px rgba(0,0,0,.85), 0 0 44px -12px rgba(124,107,255,.45);
+  }
+  .scene-title { text-align:center; font-size:13px; font-weight:800; letter-spacing:.42em; color:#b4a5ff; }
+  .scene-sub { text-align:center; font-size:12.5px; color:#8ea2cc; margin:8px 0 24px; }
+  .steps { display:grid; gap:12px; }
+  .step {
+    display:flex; gap:14px; align-items:flex-start; padding:13px 16px; border-radius:14px;
+    background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.12); font-size:13px; line-height:1.55; color:#bccbef;
+    transform:rotateX(6deg); transition:transform .3s, box-shadow .3s;
+  }
+  .step:hover { transform:rotateX(0deg) translateX(6px); box-shadow:0 14px 30px -12px rgba(0,0,0,.7); }
+  .step b { color:#eaf2ff; }
+  .step code { font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; background:rgba(0,229,255,.10); padding:1px 6px; border-radius:6px; color:#7fe9ff; }
+  .snum {
+    flex:none; width:26px; height:26px; border-radius:9px; display:grid; place-items:center;
+    font-size:12.5px; font-weight:800; color:#06101f; background:linear-gradient(135deg,#00e5ff,#7c6bff);
+    box-shadow:0 6px 16px -4px rgba(0,229,255,.5);
+  }
+  .s2 .snum{background:linear-gradient(135deg,#7c6bff,#b44dff)}
+  .s3 .snum{background:linear-gradient(135deg,#ffb300,#ff6a00)}
+  .s4 .snum{background:linear-gradient(135deg,#ffe14d,#ffb300)}
+  .s5 .snum{background:linear-gradient(135deg,#00ffb2,#00c8ff)}
+  .s6 .snum{background:linear-gradient(135deg,#ff3d9a,#ff6a5e)}
+  .ledgerline { margin-top:18px; text-align:center; font-size:12.5px; color:#9fe8d4; }
+  .boundary {
+    margin-top:16px; padding:15px 18px; border-radius:14px; font-size:13px; line-height:1.6; color:#ffd9ea;
+    background:linear-gradient(90deg, rgba(255,61,154,.12), rgba(255,179,0,.06));
+    border:1px solid rgba(255,61,154,.4);
+  }
+  .boundary b { color:#ff8fc2; }
+
   /* ── observer + badges ────────────────────── */
   .observer {
     margin:44px auto 0; max-width:860px; padding:22px 26px; border-radius:20px;
@@ -166,6 +202,23 @@
 
     <div class="proof">
       ✅ <b>Proven live, not a mockup:</b> she opened a tmux window and started <b>claude</b> in it — a full agent, still running in its own window on the socket.
+    </div>
+
+    <div class="scene">
+      <div class="scene-title">THE CLAUDE MOMENT</div>
+      <div class="scene-sub">how “type claude into the terminal” actually worked — 2026-09-04, 15:31, wifi optional</div>
+      <div class="steps">
+        <div class="step s1"><span class="snum">1</span><div><b>You said:</b> “type claude into the terminal.”</div></div>
+        <div class="step s2"><span class="snum">2</span><div><b>She mapped your words to one action:</b> <code>terminal.run</code> with the command <code>claude</code> — the model names the action, it never freestyles a shell line.</div></div>
+        <div class="step s3"><span class="snum">3</span><div><b>The yes-gate spoke:</b> “I'm about to run this on your Mac: <b>claude</b>. Should I go ahead?” — you said <b>yes</b>. Nothing runs without that yes. Not even this.</div></div>
+        <div class="step s4"><span class="snum">4</span><div><b>One one-time signed token</b>, the command sealed inside it — what was signed is what ran; nothing can be swapped in flight.</div></div>
+        <div class="step s5"><span class="snum">5</span><div><b>The bridge opened a NEW tmux window</b> named <code>claude</code> and ran it there — environment scrubbed to 5 variables, so your SSH keys can't leak in.</div></div>
+        <div class="step s6"><span class="snum">6</span><div><b>Claude Code is STILL ALIVE in that window</b> — a full agent you can attach to and drive yourself:<br><code>tmux -L lipsi attach -t lipsi</code></div></div>
+      </div>
+      <div class="ledgerline">🧾 Every step above left a ledger row — command hash, exit code, tmux pane id. The replay is the receipt.</div>
+      <div class="boundary">
+        <b>The honest boundary (today):</b> she can <b>open anything as its own window</b> — a command, a program, a whole agent — and read its output back to you. She cannot <b>yet</b> type into an <b>already-open</b> session. That interactive layer is the next build — and it is the only thing between this and a full vocal orchestrator.
+      </div>
     </div>
 
     <div class="mesh">
